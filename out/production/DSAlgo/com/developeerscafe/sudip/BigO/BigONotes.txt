@@ -1,0 +1,85 @@
+O(n^2) : Quadratic Time
+O(1) : Linear Time
+
+4 rules to calculate Big O : 
+
+Why BigO ? We alawys measure the worst case.
+
+Rule 1 : Worst Case
+Rule 2 : Remove Constraints/Constants
+Rule 3 : Different Terms for Input
+Rule 4 : Drop Non-Dominants
+
+RULE 1 : What can be the worst case scenario of a problem-statment ?
+
+RULE 2 : Remove any constants. i.e. if BigO of something is O(n/2 + 100) here for very large inputs dividing by 2 and adding an additional 100 won't really matter. Hence it gets reduced to O(n).
+
+RULE 3 :  What does this mean i.e. different terms for input. Let's take an example.
+
+/* CODE-SEGMENT */
+
+public static void compressBoxes(int[] boxArrFirst, int[] boxArrSecond)
+{
+  Arrays.stream(boxArrFirst).forEach(box -> executeBoxCompression(box));
+
+Arrays.stream(boxArrSecond).forEach(box -> executeBoxCompression(box));
+}
+
+/* CODE-SEGMENT */
+
+
+In this case there are two types of input i.e.
+boxArrFirst which can be of any length varying from 1...n
+boxArrSecond which can be of any length varying from 1...m.
+
+Here we can't mention the BigO as O(n+n) => O(2n) => O(n)
+Since the input size may vary here for the first stream on boxArrFirst it will take O(n) and for stream on boxArrSecond it will take O(m).
+
+Summing up it will take O(n+m);
+
+Now you may ask what if it was a nested one i.e.
+
+Arrays.stream(boxArrFirst).forEach(box -> {
+
+Arrays.stream(boxArrSecond).forEach(box -> executeBoxCompression(box));
+
+executeBoxCompression(box);
+});
+
+Guess what it will take O(n*m) and not O(n^2), since the input types are different.
+
+Would the nested stream have been done either on boxArrFirst or boxArrSecond it would have taken O(n^2).
+
+RULE 4 : Dropping Non-Dominants mean to not consider the variables in the equation that contributes significantly to analyze the complexity. Given that, lets assume some code-segment has a BigO of O(n^2 + 5n + 1000 + n/2)
+
+In this case suppose for 500 input 
+n^2 will give : 250000
+5n will give : 2500
+n/2 will give : 250
+
+Here only n^2 significantly contributes to the analysis of the complexity, hence the other parts can be droped. Therefore , the overall BigO will be O(n^2).
+
+What can cause time in a function ?
+
+1. Operations, +,-
+2. Comparisions, <,>,==
+3. Looping
+4. Outside function call
+
+Scalable ? Worry about large inputs
+
+----------------------
+PILLARS OF PROGRAMMING
+----------------------
+1. Readable
+2. Scalable 
+  2.1 Time & Speed 
+  2.2 Memory
+
+-----------------
+SPACE COMPLEXITY
+-----------------
+1. Heap memory : Where we store variables
+2. Stack memory : Where we keep track of our function calls
+
+Trade Off between Time and Space.

@@ -1,3 +1,7 @@
+package com.developeerscafe.sudip.BigO;
+
+import java.util.*;
+
 class BigOCalculation {
   public static void main(String[] args) {
     int result = funChallenge();
